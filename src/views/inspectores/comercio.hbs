@@ -1,0 +1,79 @@
+<!-- Header -->
+			<header id="header">
+				<h1><a href="#" style="display: flex; justify-content: center; align-items: center;"><img src="../images/logo_m.svg" style="min-height:4vh; height: 5vh;" alt="" srcset=""></a></h1>
+				<a href="#">Hola, <strong>Inspector</strong></a>
+			</header>
+
+		<!-- Banner -->
+            
+            
+			<section id="banner">
+				<div class="inner" style="overflow-y:scroll; overflow-x:hidden; background-image: url('../images/Individual.png'); background-position:center; background-size:60%; background-repeat: no-repeat;">
+					<h2 class="major special">Dirección de Mercados y Plazas</h2>
+					<div class="table-wrapper">
+						<table class="alt" style="font-weight: bold; background-color: rgba(26,59,102,1.0);">
+							{{#each folios2}}
+							<tbody>
+								<tr>
+									<td>Folio</td>
+									<td>{{Folio}}</td>
+								</tr>
+								<tr>
+									<td>Nombre del Negocio</td>
+									<td>{{Nomb_Comercial}}</td>
+								</tr>
+								<tr>
+									<td>Nombre del Comerciante</td>
+									<td>{{Nombres}} {{Ape_Mat}} {{Ape_Pat}}</td>
+								</tr>
+								<tr>
+									<td>Dirección</td>
+									<td>{{Calle}} {{Numero}}</td>
+								</tr>
+								<tr>
+									<td>Colonia</td>
+									<td>{{Colonia}}</td>
+								</tr>
+								<tr>
+									<td>Sector</td>
+									<td>{{Sector}}</td>
+								</tr>
+								<tr>
+									<td>Horario</td>
+									<td>{{Horario}}</td>
+								</tr>
+								<tr>
+									<td>Giro</td>
+									<td>{{Giro}}</td>
+								</tr>
+								<tr>
+									<td>Área Permitida</td>
+									<td>{{Area_Permitida}}</td>
+								</tr>
+								<tr>
+									<td>Turno</td>
+									<td>{{Turno}}</td>
+								</tr>
+                                <tr>
+									<td>Unión</td>
+									<td>{{Union}}</td>
+								</tr>
+								<tr>
+									<td>Antigüedad</td>
+									<td>{{antiguedad}}</td>
+								</tr>
+								<tr>
+									<td>Pago Derechos</td>
+									<td>{{Pago_Derechos}}</td>
+								</tr>
+							</tbody>
+							{{/each}}
+						</table>
+						<h3>Notas</h3>
+						<textarea style="resize: none; font-weight: bold; background-color: rgba(26,59,102,1.0);" name="" id="" cols="30" rows="5"></textarea>
+					</div>
+					<ul class="actions special stacked" style="padding-top: 20px;">
+						<li><a href="#" class="button primary large">Finalizar Inspección</a></li>
+					</ul>
+				</div>
+			</section>

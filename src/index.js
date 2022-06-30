@@ -36,9 +36,11 @@ app.use(require('./routes/'));
 app.use(require('./routes/auth'));
 var catalogRouter = require('./routes/comercios');
 app.use('/comercios', catalogRouter);
+var catalogRouter2 = require('./routes/contador');
+app.use('/contador', catalogRouter2);
 
 //Public
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname,'/public')));
 
 //Iniciar Servidor
 app.listen(app.get('port'), ()=>{

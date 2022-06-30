@@ -17,8 +17,11 @@ pool.getConnection((err,connection)=>{
         }
     }
 
-    if(connection) connection.release()
+    if(connection){
+        connection.release();
         console.log('DB is connected');
+    } 
+        
         return;
     
 });
