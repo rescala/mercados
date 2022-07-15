@@ -10,7 +10,12 @@ router.get('/folio/:id',async (req,res)=>{
     let folio = req.params;
     const folios = await pool.query('SELECT `comercio`.Folio,`comercio`.Nomb_Comercial,`comercio`.Horario,`comercio`.Giro,`comercio`.Descripcion,`comercio`.Area_Permitida,`comercio`.Turno,`comerciante`.Ape_Pat,`comerciante`.Ape_Mat,`comerciante`.Nombres,`comerciante`.Union_Comercio,`comercio`.antiguedad,`comerciante`.Pago_Derechos,`comerciante`.Telefono,`direccion_comercio`.Calle,`direccion_comercio`.Numero,`direccion_comercio`.Colonia,`direccion_comercio`.Sector FROM `comercio` INNER JOIN `comerciante` on `comerciante`.Id_Comercio=`comercio`.Id INNER JOIN `direccion_comercio` on `direccion_comercio`.Id_Comercio=`comercio`.Id WHERE `comercio`.Folio="'+folio.id+'";');
     console.log(folios);
-    res.render('general/comercio',{folios});
+    if (folios == "") {
+        res.redirect("/comercios/no-encontrado");
+    } else {
+        res.render('general/comercio',{folios});    
+    }
+    
 });
 
 router.post('/inspeccion', async (req,res)=>{
@@ -26,8 +31,12 @@ router.get('/folio/inspector/:id', (req,res)=>{
     res.render('login/inspector',{folio,layout:'inspector'});
 });
 
-router.post('/folios',(req,res)=>{
-    res.send(req.body);
+router.get('/no-encontrado',(req,res)=>{
+    res.render('general/no-resultado');
+});
+
+router.get('*',(req,res)=>{
+    res.render('general/404');
 });
 
 module.exports=router;

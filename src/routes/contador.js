@@ -17,4 +17,12 @@ router.get('/nuevo',(req,res)=>{
     res.render('contador/nuevo');
 });
 
+router.get('/editar',(req,res)=>{
+    res.render('contador/editar');
+});
+
+router.get('*',(req,res)=>{
+    res.render('general/404');
+});
+
 module.exports=router;

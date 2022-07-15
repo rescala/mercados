@@ -42,6 +42,10 @@ app.use('/contador', catalogRouter2);
 //Public
 app.use(express.static(path.join(__dirname,'/public')));
 
+app.use((req, res, next) => {
+    res.status(404).render('general/404');
+})
+
 //Iniciar Servidor
 app.listen(app.get('port'), ()=>{
     console.log('Server listening on port ',app.get('port'));
