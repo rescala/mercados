@@ -2,6 +2,7 @@
 			<header id="header">
 				<h1><a href="#" style="display: flex; justify-content: center; align-items: center;"><img src="../images/logo_m.svg" style="min-height:4vh; height: 5vh;" alt="" srcset=""></a></h1>
 				<a href="#">Hola, <strong>Inspector</strong></a>
+				<a href="/logout">Cerrar Sesión</strong></a>
 			</header>
 
 		<!-- Banner -->
@@ -12,8 +13,9 @@
 					<h2 class="major special">Dirección de Mercados y Plazas</h2>
 					<div class="table-wrapper">
 						<table class="alt" style="font-weight: bold; background-color: rgba(26,59,102,1.0);">
-							{{#each folios2}}
+							
 							<tbody>
+								{{#each folios2}}
 								<tr>
 									<td>Folio</td>
 									<td>{{Folio}}</td>
@@ -66,8 +68,13 @@
 									<td>Pago Derechos</td>
 									<td>{{Pago_Derechos}}</td>
 								</tr>
+								<tr>
+									<td>Estatus de Pago</td>
+									<td>{{Pago}}</td>
+								</tr>
+								{{/each}}
 							</tbody>
-							{{/each}}
+							
 						</table>
 						<h3>Notas</h3>
 						<textarea style="resize: none; font-weight: bold; background-color: rgba(26,59,102,1.0);" name="" id="" cols="30" rows="5"></textarea>

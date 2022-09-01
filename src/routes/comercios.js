@@ -18,17 +18,12 @@ router.get('/folio/:id',async (req,res)=>{
     
 });
 
-router.post('/inspeccion', async (req,res)=>{
+router.get('/inspeccion/:folio', async (req,res)=>{
     console.log(req.body);
-    let folio2 = req.body.folio;
-    const folios2 = await pool.query('SELECT `comercio`.Folio,`comercio`.Nomb_Comercial,`comercio`.Horario,`comercio`.Giro,`comercio`.Descripcion,`comercio`.Area_Permitida,`comercio`.Turno,`comerciante`.Ape_Pat,`comerciante`.Ape_Mat,`comerciante`.Nombres,`comerciante`.Union_Comercio,`comercio`.antiguedad,`comerciante`.Pago_Derechos,`comerciante`.Telefono,`direccion_comercio`.Calle,`direccion_comercio`.Numero,`direccion_comercio`.Colonia,`direccion_comercio`.Sector FROM `comercio` INNER JOIN `comerciante` on `comerciante`.Id_Comercio=`comercio`.Id INNER JOIN `direccion_comercio` on `direccion_comercio`.Id_Comercio=`comercio`.Id WHERE `comercio`.Folio="'+folio2+'";');
+    let folio2 = req.params.folio;
+    const folios2 = await pool.query('SELECT `comercio`.Folio,`comercio`.Nomb_Comercial,`comercio`.Horario,`comercio`.Giro,`comercio`.Descripcion,`comercio`.Area_Permitida,`comercio`.Turno,`comerciante`.Ape_Pat,`comerciante`.Ape_Mat,`comerciante`.Nombres,`comerciante`.Union_Comercio,`comercio`.antiguedad,`comerciante`.Pago_Derechos,`comerciante`.Telefono,`direccion_comercio`.Calle,`direccion_comercio`.Numero,`direccion_comercio`.Colonia,`direccion_comercio`.Sector, UPPER(DATE_FORMAT(pagos.Fecha, "%b-%Y")) AS Mes, historial_pagos.`Pago` FROM `comercio` INNER JOIN `comerciante` on `comerciante`.Id_Comercio=`comercio`.Id INNER JOIN `direccion_comercio` on `direccion_comercio`.Id_Comercio=`comercio`.Id INNER JOIN historial_pagos ON historial_pagos.Id_Comercio=comercio.Id INNER JOIN pagos ON pagos.Id=historial_pagos.Id_Pagos WHERE DATE_FORMAT(CURRENT_DATE, "%b-%Y")=DATE_FORMAT(pagos.Fecha, "%b-%Y") AND `comercio`.Folio="'+folio2+'";');
     console.log(folios2);
     res.render('inspectores/comercio',{folios2,layout:'inspector'});
-});
-
-router.get('/folio/inspector/:id', (req,res)=>{
-    let folio=req.params;
-    res.render('login/inspector',{folio,layout:'inspector'});
 });
 
 router.get('/no-encontrado',(req,res)=>{

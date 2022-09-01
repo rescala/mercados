@@ -6,14 +6,20 @@
 		<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1" />
 		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+		<link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../../assets/css/mdb.min.css">
+		<!-- Plugin file -->
+		<link rel="stylesheet" href="../../assets/css/addons/datatables.min.css">
+		<link rel="stylesheet" href="../../assets/css/style.css">
 	</head>
 	<body class="is-preload" style="padding-top: 0;">
 
 		<!-- Header -->
 			
-
         {{{body}}}
-
+		
 
 
 
@@ -25,11 +31,27 @@
 			</footer>
 
 		<!-- Scripts -->
+			
+			<script src="/assets/js/jquery.js"></script>
 			<script src="/assets/js/jquery.min.js"></script>
 			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script type="text/javascript" src="/assets/js/popper.min.js"></script>
+			<script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+			<script type="text/javascript" src="/assets/js/mdb.min.js"></script>
+		<!-- Plugin file -->
+			<script src="/assets/js/addons/datatables.min.js"></script>
+
 			<script src="/assets/js/browser.min.js"></script>
 			<script src="/assets/js/breakpoints.min.js"></script>
 			<script src="/assets/js/util.js"></script>
 			<script src="/assets/js/main.js"></script>
+			<script>
+				$(document).ready(function(){
+  					$('#dtBasicExample').DataTable();
+  					$('.dataTables_length').addClass('bs-select');
+    				console.log( "ready!" );
+				});
+				
+			</script>
 	</body>
 </html>

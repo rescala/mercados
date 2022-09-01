@@ -16,54 +16,82 @@
 					
 		<!-- Formulario -->
 			
-                    <form action="/comercios/inspeccion" style="max-height:70%;" id="myform" method="post">
+                    <form action="/contador/registrar_comercio/" style="max-height:70%;" id="myform" method="post">
 					<ul class="actions special stacked">
-						<div class="col-6 col-12-xsmall">
-							<input type="text" name="folio" style="border-color: rgba(0,0,0,0.7);" id="folio" value="" placeholder="Folio"/>
+						<div class="col-12"  style="padding-top:10px;">
+							<label>Folio</label>
+							{{folio_final}}
+							<input type="text" name="Folio" style="display:none;" id="Folio" value="{{folio_final}}" placeholder="Folio" />
 						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Nombre Comercial" />
+						<div class="col-12"  style="padding-top:10px;">
+							<label>Nombre Comercial</label>
+							<input type="text" name="Nomb_Comercial" style="border-color: rgba(0,0,0,0.7); color:black;" id="Nomb_Comercial" value="" placeholder="Nombre Comercial" />
 						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Horario" />
+						<div class="col-12"  style="padding-top:10px;">
+							<label>Horario</label>
+							<input type="text" name="Horario" style="border-color: rgba(0,0,0,0.7); color:black;" id="Horario" value="" placeholder="Horario" />
 						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Giro" />
+						<div class="col-12"  style="padding-top:10px;">
+							<label>Giro</label>
+							<input type="text" name="Giro" style="border-color: rgba(0,0,0,0.7); color:black;" id="Giro" value="" placeholder="Giro" />
 						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Área Permitida" />
+						<div class="col-12"  style="padding-top:10px;">
+							<label>Descripción</label>
+							<input type="text" name="Descripcion" style="border-color: rgba(0,0,0,0.7); color:black;" id="Descripcion" value="" placeholder="Descripción" />
 						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Nombre(s)" />
+						<div class="col-12"  style="padding-top:10px;">
+							<label>Área Permitida</label>
+							<input type="text" name="Area_Permitida" style="border-color: rgba(0,0,0,0.7); color:black;" id="Area_Permitida" value="" placeholder="Área Permitida" />
 						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Apellido Paterno" />
+						<div class="col-12"  style="padding-top:10px;">
+							<label>Turno</label>
+							<input type="text" name="Turno" style="border-color: rgba(0,0,0,0.7); color:black;" id="Turno" value="" placeholder="Turno" />
 						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Apellido Materno" />
+						<div class="col-12"  style="padding-top:10px;">
+							<label>Apellido Paterno</label>
+							<input type="text" name="Ape_Pat" style="border-color: rgba(0,0,0,0.7); color:black;" id="Ape_Pat" value="" placeholder="Apellido Paterno" />
 						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Clave de Elector" />
+						<div class="col-12"  style="padding-top:10px;">
+							<label>Apellido Materno</label>
+							<input type="text" name="Ape_Mat" style="border-color: rgba(0,0,0,0.7); color:black;" id="Ape_Mat" value="" placeholder="Apellido Materno" />
 						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Calle" />
+						<div class="col-12"  style="padding-top:10px;">
+							<label>Nombres</label>
+							<input type="text" name="Nombres" style="border-color: rgba(0,0,0,0.7); color:black;" id="Nombres" value="" placeholder="Nombre(s)" />
 						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Número" />
+						<div class="col-12"  style="padding-top:10px;">
+							<label>Unión Comercial</label>
+							<input type="text" name="Union_Comercio" style="border-color: rgba(0,0,0,0.7); color:black;" id="Union_Comercio" value="" placeholder="Unión Comercial" />
 						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Colonia" />
+						<div class="col-12"  style="padding-top:10px;">
+							<label>Antigüedad</label>
+							<input type="text" name="antiguedad" style="border-color: rgba(0,0,0,0.7); color:black;" id="antiguedad" value="" placeholder="Antigüedad" />
 						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Sector" />
+						<div class="col-12"  style="padding-top:10px;">
+							<label>Pago de Derechos</label>
+							<input type="text" name="Pago_Derechos" style="border-color: rgba(0,0,0,0.7); color:black;" id="Pago_Derechos" value="" placeholder="Pago de Derechos" />
 						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Unión" />
+						<div class="col-12"  style="padding-top:10px;">
+							<label>Teléfono</label>
+							<input type="text" name="Telefono" style="border-color: rgba(0,0,0,0.7); color:black;" id="Telefono" value="" placeholder="Teléfono" />
 						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Pago de Derechos" />
+						<div class="col-12"  style="padding-top:10px;">
+							<label>Calle</label>
+							<input type="text" name="Calle" style="border-color: rgba(0,0,0,0.7); color:black;" id="Calle" value="" placeholder="Calle" />
 						</div>
-						<li><a onclick="document.getElementById('myform').submit(); return false;" class="button primary large">Registrar</a></li>
+						<div class="col-12"  style="padding-top:10px;">
+							<label>Número</label>
+							<input type="text" name="Numero" style="border-color: rgba(0,0,0,0.7); color:black;" id="Numero" value="" placeholder="Número" />
+						</div>
+						<div class="col-12"  style="padding-top:10px;">
+							<label>Colonia</label>
+							<input type="text" name="Colonia" style="border-color: rgba(0,0,0,0.7); color:black;" id="Colonia" value="" placeholder="Colonia" />
+						</div>
+						<div class="col-12"  style="padding-top:10px;">
+							<label>Sector</label>
+							<input type="text" name="Sector" style="border-color: rgba(0,0,0,0.7); color:black;" id="Sector" value="" placeholder="Sector" />
+						</div>
+						<li><button type="submit" form="myform" class="button primary large">Registrar</button></li>
 						<li><a href="/contador/" style="background-color: red;" class="button primary">Cancelar</a></li>
 					</ul>
                     </form>

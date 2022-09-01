@@ -12,59 +12,38 @@
 				<div class="inner" style="overflow-y:scroll; overflow-x:hidden; background-image: url('/images/Individual.png'); background-position:center; background-size:60%; background-repeat: no-repeat;">
 					<br><br>
 					<h2 class="major special">Formulario de Actualización</h2>
-					<h4>Actualización de Datos de Comercio</h4>
-					
+					<h4>Actualización de Datos del Inspector</h4>
+				
 		<!-- Formulario -->
 			
-                    <form action="/comercios/inspeccion" style="max-height:70%;" id="myform" method="post">
+                    <form action="/signup2" style="max-height:70%;" id="myform" method="post">
 					<ul class="actions special stacked">
-						<div class="col-6 col-12-xsmall">
-							<input type="text" name="folio" style="border-color: rgba(0,0,0,0.7);" id="folio" value="" placeholder="Folio"/>
+						{{#each inspector}}
+						<input type="text" name="Id" id="Id" value="{{Id}}" style="display:none;">
+						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
+							<input type="text" name="Nombres" style="border-color: rgba(0,0,0,0.7); color:black;" id="Nombres" value="{{Nombres}}" required placeholder="Nombre(s)" />
 						</div>
 						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Nombre Comercial" />
+							<input type="text" name="Ape_Pat" style="border-color: rgba(0,0,0,0.7); color:black;" id="Ape_Pat" value="{{Ape_Pat}}" required placeholder="Apellido Paterno" />
 						</div>
 						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Horario" />
+							<input type="text" name="Ape_Mat" style="border-color: rgba(0,0,0,0.7); color:black;" id="Ape_Mat" value="{{Ape_Mat}}" required placeholder="Apellido Materno" />
 						</div>
 						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Giro" />
+							<input type="text" name="zonas" style="border-color: rgba(0,0,0,0.7); color:black;" id="zonas" value="{{zonas}}" required placeholder="Zona" />
 						</div>
 						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Área Permitida" />
+							<input type="text" name="turno" style="border-color: rgba(0,0,0,0.7); color:black;" id="turno" value="{{turno}}" required placeholder="Turno" />
 						</div>
 						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Nombre(s)" />
+							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7); color:black;" id="name" value="{{usuario}}" required placeholder="Usuario" />
 						</div>
 						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Apellido Paterno" />
+							<input type="text" name="password" style="border-color: rgba(0,0,0,0.7); color:black;" id="password" value="" required placeholder="Contraseña" />
 						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Apellido Materno" />
-						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Clave de Elector" />
-						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Calle" />
-						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Número" />
-						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Colonia" />
-						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Sector" />
-						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Unión" />
-						</div>
-						<div class="col-6 col-12-xsmall"  style="padding-top:10px;">
-							<input type="text" name="usuario" style="border-color: rgba(0,0,0,0.7);" id="name" value="" placeholder="Pago de Derechos" />
-						</div>
-						<li><a onclick="document.getElementById('myform').submit(); return false;" class="button primary large">Registrar</a></li>
-						<li><a href="/contador/" style="background-color: red;" class="button primary">Cancelar</a></li>
+						{{/each}}
+						<li><button type="submit" form="myform" class="button primary large">Guardar</button></li>
+						<li><a href="/contador/inspectores" style="background-color: red;" class="button primary">Cancelar</a></li>
 					</ul>
                     </form>
 				

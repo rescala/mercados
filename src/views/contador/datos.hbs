@@ -7,34 +7,58 @@
 		<!-- Banner -->
             
             
-			<section id="banner">
+			<section id="banner" class="w-auto p-3">
 				<div class="inner" style="background-image: url('/images/Individual.png'); background-position:center; background-size:60%; background-repeat: no-repeat;">
                 <ul class="actions">
 				    <li><a href="/contador/" class="button primary">Registros</a></li>
                     <li><a href="/contador/inspectores" class="button primary">Inspectores</a></li>
 				    <li><a href="/contador/inspecciones" class="button primary">Inspecciones</a></li>
+					<li><a href="/contador/pago" class="button primary">Pagos</a></li>
 			    </ul>
+				<style>
+					.pagination .page-item.active .page-link { background-color: #1a3b66; }
+					.pagination .page-item.active .page-link { color: white; }
+
+					div.dataTables_wrapper div.dataTables_paginate ul.pagination .page-item.active .page-link:focus {
+					background-color: #1a3b66;
+					}
+
+					div.dataTables_wrapper div.dataTables_paginate ul.pagination .page-item {
+					color: white;
+					}
+
+					.pagination .page-item.active .page-link:hover {
+					background-color: #1a3b66;
+					}
+					
+				</style>
 					<h2 class="major special">Todos los registros</h2>
-					<div class="table-wrapper">
-						<table class="alt" style="font-weight: bold; background-color: rgba(26,59,102,1.0);">
-							<tbody>
-								<tr>
-									<td>Nombre del Negocio</td>
-									<td>Churritos Doña Chucha.</td>
-								</tr>
-								<tr>
-									<td>Registro</td>
-									<td>Activo.</td>
-								</tr>
-								<tr>
-									<td>Horario</td>
-									<td>9:00 am - 18:00 pm.</td>
-								</tr>
-                                <tr>
-									<td>Folio</td>
-									<td>sdjhask</td>
-								</tr>
-							</tbody>
+					<div class="table-wrapper w-auto p-3"  style="max-height: 55vh;">
+						{{> message}}
+						<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+  							<thead>
+    							<tr>
+      								<th class="th-sm">Folio</th>
+      								<th class="th-sm">A. Paterno</th>
+      								<th class="th-sm">A. Materno</th>
+      								<th class="th-sm">Nombres</th>
+      								<th class="th-sm">Pago</th>
+      								<th class="th-sm">Detalles</th>
+    							</tr>
+  							</thead>
+  							<tbody>
+								{{#each folios}}
+    							<tr>
+      								<td>{{Folio}}</td>
+      								<td>{{Ape_Pat}}</td>
+      								<td>{{Ape_Mat}}</td>
+      								<td>{{Nombres}}</td>
+      								<td>{{Pago_Derechos}}</td>
+      								<td><a style="width: 10px; height: 10px; display:flex; justify-content:center; align-items:center;" href="/contador/editar_comercio/{{Folio}}" class="btn btn-primary"><i class="fa fa-info-circle" aria-hidden="true"></i></a></td>
+    							</tr>
+								{{/each}}
+								
+  							</tbody>
 						</table>
 					</div>
 					<ul class="actions special stacked" style="padding-top: 20px;">
@@ -42,3 +66,4 @@
 					</ul>
 				</div>
 			</section>
+			
