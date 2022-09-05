@@ -1,8 +1,8 @@
 <!-- Header -->
 			<header id="header">
 				<h1><a href="index.html" style="display: flex; justify-content: center; align-items: center;"><img src="/images/logo_m.svg" style="min-height:4vh; height: 5vh;" alt="" srcset=""></a></h1>
-				<a href="/contador/">Administrador</a>
-				<a href="/logout_administrador">Cerrar Sesión</strong></a>
+				<a href="/contador_nvo/">Contador</a>
+				<a href="/logout_contador_nvo">Cerrar Sesión</strong></a>
 			</header>
 
 		<!-- Banner -->
@@ -11,9 +11,6 @@
 			<section id="banner" class="w-auto p-3">
 				<div class="inner" style="background-image: url('/images/Individual.png'); background-position:center; background-size:60%; background-repeat: no-repeat;">
                 <ul class="actions">
-				    <li><a href="/contador/" class="button primary">Registros</a></li>
-                    <li><a href="/contador/inspectores" class="button primary">Inspectores</a></li>
-				    <li><a href="/contador/inspecciones" class="button primary">Inspecciones</a></li>
 					<li><a href="/contador/pago" class="button primary">Pagos</a></li>
 			    </ul>
 				<style>
@@ -39,6 +36,7 @@
   							<thead>
     							<tr>
       								<th class="th-sm">Folio</th>
+									<th class="th-sm">Nombre</th>
       								<th class="th-sm">Detalle Pago</th>
     							</tr>
   							</thead>
@@ -46,16 +44,14 @@
 								{{#each comercios}}
     							<tr>
       								<td>{{Folio}}</td>
-      								<td><a style="width: 10px; height: 10px; display:flex; justify-content:center; align-items:center;" href="/contador/pago_detalle/{{Id}}" class="btn btn-primary btn-lg">Detalles</a></td>
+									<td>{{Ape_Pat}} {{Ape_Mat}} {{Nombres}}</td>
+      								<td><a style="width: 10px; height: 10px; display:flex; justify-content:center; align-items:center;" href="/contador_nvo/pago_detalle/{{Id}}" class="btn btn-primary btn-lg">Detalles</a></td>
     							</tr>
     							{{/each}}
 								
   							</tbody>
 						</table>
 					</div>
-					<ul class="actions special stacked" style="padding-top: 20px;">
-						<li><a href="/contador/nuevo" class="button primary large">Nuevo</a></li>
-					</ul>
 				</div>
 			</section>
 			

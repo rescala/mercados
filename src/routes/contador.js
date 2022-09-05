@@ -1,22 +1,33 @@
 const express=require('express');
 const router=express.Router();
 const pool = require('../database');
+const {isLoggedIn, isNotLoggedIn}=require('../lib/verifier_admin');
 
-router.get('/',async(req,res)=>{
+router.get('/',isLoggedIn,async(req,res)=>{
     const folios = await pool.query('SELECT `comercio`.Folio,`comerciante`.Ape_Pat,`comerciante`.Ape_Mat,`comerciante`.Nombres,`comerciante`.Pago_Derechos, `comercio`.Id FROM `comercio` INNER JOIN `comerciante` on `comerciante`.Id_Comercio=`comercio`.Id INNER JOIN `direccion_comercio` on `direccion_comercio`.Id_Comercio=`comercio`.Id;');
     res.render('contador/datos',{folios});
 });
 
-router.get('/inspecciones',(req,res)=>{
-    res.send('<h1>Aquí van las inspecciones</h1>');
+router.get('/ingresar',isNotLoggedIn,async(req,res)=>{
+    res.render('contador/ingresar');
 });
 
-router.get('/inspectores', async (req,res)=>{
+router.get('/registrar',async(req,res)=>{
+    res.render('contador/registrar');
+});
+
+router.get('/inspecciones',isLoggedIn,async(req,res)=>{
+    await pool.query('SET lc_time_names = "es_MX";');
+    const folios = await pool.query('SELECT DATE_FORMAT(supervicion.Hora, "%Y/%M/%D %k:%i:%s") as Hora, personal.Nombres,personal.Ape_Pat,personal.Ape_Mat, personal.zonas, personal.turno, comercio.Nomb_Comercial, comercio.Folio, direccion_comercio.Sector, supervicion.Comentarios FROM `supervicion` INNER JOIN comercio on supervicion.Id_Comercio=comercio.Id INNER JOIN direccion_comercio on comercio.Id=direccion_comercio.Id_Comercio INNER JOIN personal on supervicion.Id_Usuario=personal.Id;');
+    res.render('contador/inspecciones',{folios});
+});
+
+router.get('/inspectores',isLoggedIn,async (req,res)=>{
     const inspectores = await pool.query('Select * from personal;');
     res.render('contador/inspectores',{inspectores});
 });
 
-router.get('/nuevo',async(req,res)=>{
+router.get('/nuevo',isLoggedIn,async(req,res)=>{
     const folio = await pool.query('Select Folio from comercio where id=(select MAX(id) from comercio);');
     const result = Object.values(JSON.parse(JSON.stringify(folio[0])));
     result.forEach((v) => resultado=v);
@@ -42,11 +53,11 @@ router.get('/nuevo',async(req,res)=>{
     res.render('contador/nuevo',{folio_final});
 });
 
-router.get('/nuevo_inspector',(req,res)=>{
+router.get('/nuevo_inspector',isLoggedIn,(req,res)=>{
     res.render('contador/nuevo_inspector');
 });
 
-router.post('/registrar_inspector', async (req,res) =>{
+router.post('/registrar_inspector',isLoggedIn,async (req,res) =>{
     console.log(req.body);
     const {Nombres, Ape_Pat, Ape_Mat, turno, zonas, usuario, password}=req.body;
     const newInspector = {
@@ -64,7 +75,7 @@ router.post('/registrar_inspector', async (req,res) =>{
     res.redirect('/contador/inspectores');
 });
 
-router.post('/editar_inspector', async (req,res) =>{
+router.post('/editar_inspector',isLoggedIn,async (req,res) =>{
     const id=req.body.Id;
     const {Nombres, Ape_Pat, Ape_Mat, turno, zonas, usuario, password}=req.body;
     const newInspector = {
@@ -83,7 +94,7 @@ router.post('/editar_inspector', async (req,res) =>{
     res.redirect('/contador/inspectores');
 });
 
-router.post('/editar_comercio/:id', async (req,res) =>{
+router.post('/editar_comercio/:id',isLoggedIn, async (req,res) =>{
     const id=req.params.id;
     const {Nomb_Comercial, Horario, Giro, Descripcion, Area_Permitida, Turno, Ape_Pat, Ape_Mat, Nombres, Union_Comercio, antiguedad, Pago_Derechos, Telefono, Calle, Numero, Colonia, Sector}=req.body;
     const Comercio = {
@@ -120,7 +131,7 @@ router.post('/editar_comercio/:id', async (req,res) =>{
     res.redirect('/contador/');
 });
 
-router.post('/registrar_comercio/', async (req,res) =>{
+router.post('/registrar_comercio/',isLoggedIn, async (req,res) =>{
     const id=req.params.id;
     const {Nomb_Comercial, Horario, Giro, Folio, Descripcion, Area_Permitida, Turno, Ape_Pat, Ape_Mat, Nombres, Union_Comercio, antiguedad, Pago_Derechos, Telefono, Calle, Numero, Colonia, Sector}=req.body;
     const Comercio = {
@@ -158,28 +169,32 @@ router.post('/registrar_comercio/', async (req,res) =>{
     console.log(Comerciante);
     await pool.query('INSERT INTO comerciante set ? ',[Comerciante]);
     await pool.query('INSERT INTO direccion_comercio set ?',[Direccion_Comercio]);
+    const folio = await pool.query('SELECT MAX(`Id`) as Id FROM `comercio`;');
+    const result2 = Object.values(JSON.parse(JSON.stringify(folio)));
+    console.log(result2[0].Id);
+    await pool.query('INSERT INTO `historial_pagos`(`Id_Pagos`, `Id_Comercio`) VALUES (1,'+result2[0].Id+'),(2,'+result2[0].Id+'),(3,'+result2[0].Id+'),(4,'+result2[0].Id+'),(5,'+result2[0].Id+'),(6,'+result2[0].Id+'),(7,'+result2[0].Id+'),(8,'+result2[0].Id+'),(9,'+result2[0].Id+'),(10,'+result2[0].Id+'),(11,'+result2[0].Id+'),(12,'+result2[0].Id+'),(13,'+result2[0].Id+'),(14,'+result2[0].Id+'),(15,'+result2[0].Id+'),(16,'+result2[0].Id+'),(17,'+result2[0].Id+'),(18,'+result2[0].Id+'),(19,'+result2[0].Id+'),(20,'+result2[0].Id+'),(21,'+result2[0].Id+'),(22,'+result2[0].Id+'),(23,'+result2[0].Id+'),(24,'+result2[0].Id+'),(25,'+result2[0].Id+'),(26,'+result2[0].Id+'),(27,'+result2[0].Id+'),(28,'+result2[0].Id+'),(29,'+result2[0].Id+'),(30,'+result2[0].Id+'),(31,'+result2[0].Id+'),(32,'+result2[0].Id+'),(33,'+result2[0].Id+'),(34,'+result2[0].Id+'),(35,'+result2[0].Id+'),(36,'+result2[0].Id+');');
     req.flash('success','Comercio Registrado Correctamente');
     res.redirect('/contador/');
 });
 
-router.get('/editar_comercio/:id',async(req,res)=>{
+router.get('/editar_comercio/:id',isLoggedIn,async(req,res)=>{
     const comercio = await pool.query('SELECT `comercio`.Id,`comercio`.Folio,`comercio`.Nomb_Comercial,`comercio`.Horario,`comercio`.Giro,`comercio`.Descripcion,`comercio`.Area_Permitida,`comercio`.Turno,`comerciante`.Ape_Pat,`comerciante`.Ape_Mat,`comerciante`.Nombres,`comerciante`.Union_Comercio,`comercio`.antiguedad,`comerciante`.Pago_Derechos,`comerciante`.Telefono,`direccion_comercio`.Calle,`direccion_comercio`.Numero,`direccion_comercio`.Colonia,`direccion_comercio`.Sector FROM `comercio` INNER JOIN `comerciante` on `comerciante`.Id_Comercio=`comercio`.Id INNER JOIN `direccion_comercio` on `direccion_comercio`.Id_Comercio=`comercio`.Id WHERE `comercio`.Folio="'+req.params.id+'";');
     console.log(comercio);
     res.render('contador/editar_comercio',{comercio});
 });
 
-router.get('/editar/:id',async(req,res)=>{
+router.get('/editar/:id',isLoggedIn,async(req,res)=>{
     const inspector = await pool.query('Select * from personal where id='+req.params.id+';');
     console.log(req.params.id);
     res.render('contador/editar',{inspector});
 });
 
-router.get('/pago',async(req,res)=>{
+router.get('/pago',isLoggedIn,async(req,res)=>{
     const comercios = await pool.query('Select Id,Folio from comercio;');
     res.render('contador/pago',{comercios});
 });
 
-router.get('/pago_detalle/:id', async (req,res)=>{
+router.get('/pago_detalle/:id',isLoggedIn, async (req,res)=>{
     await pool.query('SET lc_time_names = "es_MX";');
     const folio = await pool.query('select * from comercio where Id='+req.params.id+';');
     const comercios = await pool.query('SELECT historial_pagos.`Id`, historial_pagos.`Id_Pagos`, historial_pagos.`Id_Comercio`,IF(historial_pagos.Pago="Adeuda", 1,null) as valor, historial_pagos.`Pago`, UPPER(DATE_FORMAT(pagos.Fecha, "%b-%Y")) AS Mes FROM `historial_pagos` INNER JOIN `pagos` ON historial_pagos.Id_Pagos=pagos.Id INNER JOIN comercio ON historial_pagos.Id_Comercio=comercio.Id WHERE comercio.Id='+req.params.id+';');
@@ -188,7 +203,7 @@ router.get('/pago_detalle/:id', async (req,res)=>{
     res.render('contador/pago_detalle',{comercios,folio_});
 });
 
-router.get('/realizar_pago/:id', async (req,res)=>{
+router.get('/realizar_pago/:id',isLoggedIn, async (req,res)=>{
     const folio = await pool.query('SELECT * FROM `historial_pagos` where Id='+req.params.id+';');
     //pool.query('UPDATE `historial_pagos` SET `Pago`="Pagado" where Id='+req.params.id);
     folio_= folio[0];
@@ -196,7 +211,7 @@ router.get('/realizar_pago/:id', async (req,res)=>{
     res.render('contador/pago_confirmacion',{folio_});
 });
 
-router.get('/correccion_pago/:id', async (req,res)=>{
+router.get('/correccion_pago/:id',isLoggedIn, async (req,res)=>{
     const folio = await pool.query('SELECT * FROM `historial_pagos` where Id='+req.params.id+';');
     //pool.query('UPDATE `historial_pagos` SET `Pago`="Pagado" where Id='+req.params.id);
     folio_= folio[0];
@@ -204,7 +219,7 @@ router.get('/correccion_pago/:id', async (req,res)=>{
     res.render('contador/pago_correccion',{folio_});
 });
 
-router.get('/concretar_pago/:id', async (req,res)=>{
+router.get('/concretar_pago/:id',isLoggedIn, async (req,res)=>{
     const folio = await pool.query('SELECT * FROM `historial_pagos` where Id='+req.params.id+';');
     pool.query('UPDATE `historial_pagos` SET `Pago`="Pagado" where Id='+req.params.id);
     folio_ = folio[0];
@@ -214,7 +229,7 @@ router.get('/concretar_pago/:id', async (req,res)=>{
     //res.send('Pagado');
 });
 
-router.get('/corregir_pago/:id', async (req,res)=>{
+router.get('/corregir_pago/:id',isLoggedIn, async (req,res)=>{
     const folio = await pool.query('SELECT * FROM `historial_pagos` where Id='+req.params.id+';');
     pool.query('UPDATE `historial_pagos` SET `Pago`="Adeuda" where Id='+req.params.id);
     folio_ = folio[0];

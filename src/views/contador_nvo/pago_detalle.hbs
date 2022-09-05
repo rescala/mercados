@@ -2,8 +2,8 @@
 <!-- Header -->
 			<header id="header">
 				<h1><a href="#" style="display: flex; justify-content: center; align-items: center;"><img src="/images/logo_m.svg" style="min-height:4vh; height: 5vh;" alt="" srcset=""></a></h1>
-				<a href="/contador/">Administrador</a>
-				<a href="/logout_administrador">Cerrar Sesión</strong></a>
+				<a href="/contador_nvo/">Contador</a>
+				<a href="/logout_contador_nvo">Cerrar Sesión</strong></a>
 			</header>
 
 		<!-- Banner -->
@@ -34,15 +34,15 @@
       								<td>{{Mes}}</td>
 									<td>{{Pago}}</td>
 									{{#if valor}}
-      								<td><a style="width: 10px; height: 10px; display:flex; justify-content:center; align-items:center;" href="/contador/realizar_pago/{{Id}}" class="btn btn-primary btn-lg">Pagar</a></td>
+      								<td><a style="width: 10px; height: 10px; display:flex; justify-content:center; align-items:center;" href="/contador_nvo/realizar_pago/{{Id}}" class="btn btn-primary btn-lg">Pagar</a></td>
 									{{else}}
-									<td><a style="width: 10px; height: 10px; display:flex; justify-content:center; align-items:center;" href="/contador/correccion_pago/{{Id}}" class="btn btn-danger btn-lg"> Cambiar</a></td>
+									<td><a style="width: 10px; height: 10px; display:flex; justify-content:center; align-items:center;" href="/contador_nvo/correccion_pago/{{Id}}" class="btn btn-danger btn-lg"> Cambiar</a></td>
 									{{/if}}
     							</tr>
     					{{/each}}
 						</tbody>
 						</table>
-						<li><a href="/contador/pago/" style="background-color: red;" class="button primary">Regresar</a></li>
+						<li><a href="/contador_nvo/pago/" style="background-color: red;" class="button primary">Regresar</a></li>
 					</ul>
                     
 				

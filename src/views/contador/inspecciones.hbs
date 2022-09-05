@@ -33,29 +33,38 @@
 					}
 					
 				</style>
-					<h2 class="major special">Todos los registros</h2>
+					<h2 class="major special">Inspecciones</h2>
 					<div class="table-wrapper w-auto p-3"  style="max-height: 55vh;">
+						{{> message}}
 						<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
   							<thead>
     							<tr>
       								<th class="th-sm">Folio</th>
-      								<th class="th-sm">Detalle Pago</th>
+      								<th class="th-sm">Hora</th>
+									<th class="th-sm">Sector</th>
+      								<th class="th-sm">Inspector</th>
+      								<th class="th-sm">Zona</th>
+      								<th class="th-sm">Turno</th>
+      								<th class="th-sm">Comentario</th>
     							</tr>
   							</thead>
   							<tbody>
-								{{#each comercios}}
+								{{#each folios}}
     							<tr>
       								<td>{{Folio}}</td>
-      								<td><a style="width: 10px; height: 10px; display:flex; justify-content:center; align-items:center;" href="/contador/pago_detalle/{{Id}}" class="btn btn-primary btn-lg">Detalles</a></td>
+      								<td>{{Hora}}</td>
+      								<td>{{Sector}}</td>
+      								<td>{{Ape_Pat}} {{Ape_Mat}} {{Nombres}}</td>
+      								<td>{{zonas}}</td>
+									<td>{{turno}}</td>
+      								<td>{{Comentarios}}</td>
     							</tr>
-    							{{/each}}
+								{{/each}}
 								
   							</tbody>
 						</table>
 					</div>
-					<ul class="actions special stacked" style="padding-top: 20px;">
-						<li><a href="/contador/nuevo" class="button primary large">Nuevo</a></li>
-					</ul>
+					
 				</div>
 			</section>
 			

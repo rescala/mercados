@@ -12,6 +12,8 @@
 				<div class="inner" style="overflow-y:scroll; overflow-x:hidden; background-image: url('../images/Individual.png'); background-position:center; background-size:60%; background-repeat: no-repeat;">
 					<h2 class="major special">Dirección de Mercados y Plazas</h2>
 					<div class="table-wrapper">
+						
+						{{> message}}
 						<table class="alt" style="font-weight: bold; background-color: rgba(26,59,102,1.0);">
 							
 							<tbody>
@@ -77,10 +79,13 @@
 							
 						</table>
 						<h3>Notas</h3>
-						<textarea style="resize: none; font-weight: bold; background-color: rgba(26,59,102,1.0);" name="" id="" cols="30" rows="5"></textarea>
+						<form action="/comercios/finalizar_inspeccion" method="post">
+						<input type="text" name="folio" value="{{folio2}}" style="display:none;">
+						<textarea style="resize: none; font-weight: bold; background-color: rgba(26,59,102,1.0);" name="comentario" id="comentario" cols="30" rows="5"></textarea>
 					</div>
 					<ul class="actions special stacked" style="padding-top: 20px;">
-						<li><a href="#" class="button primary large">Finalizar Inspección</a></li>
+						<li><button type="submit" class="button primary large">Finalizar Inspección</a></li>
 					</ul>
+					</form>
 				</div>
 			</section>

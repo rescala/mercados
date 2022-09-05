@@ -32,7 +32,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: new mysql_store(database)
-}))
+}));
 app.use(flash());
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended:false}));
@@ -46,6 +46,7 @@ app.use(passport.session());
 app.use((req,res,next)=>{
     app.locals.success = req.flash('success');
     app.locals.message = req.flash('message');
+    app.locals.user = req.user;
     next();
 })
 
@@ -57,6 +58,10 @@ app.use('/comercios', catalogRouter);
 var catalogRouter2 = require('./routes/contador');
 const { allowedNodeEnvironmentFlags } = require('process');
 app.use('/contador', catalogRouter2);
+var catalogRouter3 = require('./routes/contador_nvo');
+app.use('/contador_nvo', catalogRouter3);
+var catalogRouter4 = require('./routes/editor');
+app.use('/editor', catalogRouter4);
 
 //Public
 app.use(express.static(path.join(__dirname,'/public')));

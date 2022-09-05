@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-09-2022 a las 19:43:44
+-- Tiempo de generación: 05-09-2022 a las 11:18:33
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -3094,6 +3094,26 @@ INSERT INTO `comercio` (`Id`, `Nomb_Comercial`, `Horario`, `Giro`, `Folio`, `Des
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `contador_usuario`
+--
+
+CREATE TABLE `contador_usuario` (
+  `Id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `usuario` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `contador_usuario`
+--
+
+INSERT INTO `contador_usuario` (`Id`, `nombre`, `usuario`, `password`) VALUES
+(1, 'Contador', 'dmpm_contabilidad@gmail.com', '$2a$10$e8/qiR2ZROcsY0j31feFBuFI9btXX5qlcn54VyLnBCZky637/rHOS');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `direccion_comercio`
 --
 
@@ -4623,6 +4643,26 @@ INSERT INTO `direccion_comercio` (`Id`, `Id_Comercio`, `Calle`, `Numero`, `Colon
 (1508, 1508, 'CARLOS ROBINSON  / APOSTOL DE LA RAZA', '', 'FELIPE CARRILLO PUERTO', 'REVOLUCION '),
 (1509, 1509, 'APOSTOL DE LA RAZA MAYA', '', 'FELIPE CARRILLO PUERTO', 'REVOLUCION '),
 (1510, 1510, 'GILLERMO MORALES # 39', '', 'JESUS ROMERO FLORES', 'REVOLUCION ');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `editor_usuario`
+--
+
+CREATE TABLE `editor_usuario` (
+  `Id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `usuario` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `editor_usuario`
+--
+
+INSERT INTO `editor_usuario` (`Id`, `nombre`, `usuario`, `password`) VALUES
+(1, 'Editor', 'dmpm_administracion@gmail.com', '$2a$10$1VuLgImUNXaZzHkpFivRnOOJrM3K2aRn0u3dxqJICujpS4Z.OVSi2');
 
 -- --------------------------------------------------------
 
@@ -59034,6 +59074,26 @@ INSERT INTO `historial_pagos` (`Id`, `Id_Pagos`, `Id_Comercio`, `Pago`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `maximo`
+--
+
+CREATE TABLE `maximo` (
+  `Id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `usuario` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `maximo`
+--
+
+INSERT INTO `maximo` (`Id`, `nombre`, `usuario`, `password`) VALUES
+(1, 'Administrador', 'dmpm_administrador@gmail.com', '$2a$10$FhBE.QUz5L4xGViWBZJyheob9eFE3WJ1RQEQXfoXashhz3RyCr5mK');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pagos`
 --
 
@@ -59126,7 +59186,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
-('G2H3UCEU4Ai1di9Utk1_wg6OayZfct1H', 1662139612, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":1},\"flash\":{}}');
+('ryoTaDK7XPQ1BIEctyysdeuDMsD59K7a', 1662455842, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}');
 
 -- --------------------------------------------------------
 
@@ -59137,10 +59197,20 @@ INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
 CREATE TABLE `supervicion` (
   `Id` int(11) NOT NULL,
   `Id_Usuario` int(11) NOT NULL,
-  `Hora` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
-  `Comentarios` varchar(500) COLLATE utf8_spanish_ci NOT NULL,
+  `Hora` timestamp NOT NULL DEFAULT current_timestamp(),
+  `Comentarios` varchar(500) COLLATE utf8_spanish_ci NOT NULL DEFAULT 'Sin Comentarios',
   `Id_Comercio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `supervicion`
+--
+
+INSERT INTO `supervicion` (`Id`, `Id_Usuario`, `Hora`, `Comentarios`, `Id_Comercio`) VALUES
+(3, 1, '2022-09-05 08:14:44', 'Prueba 1', 1),
+(4, 1, '2022-09-05 08:36:04', 'Sin Comentarios', 1),
+(5, 1, '2022-09-05 08:47:41', 'Sin Comentarios', 1),
+(6, 1, '2022-09-05 08:54:37', 'Sin Comentarios', 1);
 
 -- --------------------------------------------------------
 
@@ -59185,15 +59255,33 @@ ALTER TABLE `comercio`
   ADD PRIMARY KEY (`Id`);
 
 --
+-- Indices de la tabla `contador_usuario`
+--
+ALTER TABLE `contador_usuario`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- Indices de la tabla `direccion_comercio`
 --
 ALTER TABLE `direccion_comercio`
   ADD PRIMARY KEY (`Id`);
 
 --
+-- Indices de la tabla `editor_usuario`
+--
+ALTER TABLE `editor_usuario`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- Indices de la tabla `historial_pagos`
 --
 ALTER TABLE `historial_pagos`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indices de la tabla `maximo`
+--
+ALTER TABLE `maximo`
   ADD PRIMARY KEY (`Id`);
 
 --
@@ -59240,25 +59328,43 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `comerciante`
 --
 ALTER TABLE `comerciante`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1514;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1526;
 
 --
 -- AUTO_INCREMENT de la tabla `comercio`
 --
 ALTER TABLE `comercio`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1515;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1527;
+
+--
+-- AUTO_INCREMENT de la tabla `contador_usuario`
+--
+ALTER TABLE `contador_usuario`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `direccion_comercio`
 --
 ALTER TABLE `direccion_comercio`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1514;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1526;
+
+--
+-- AUTO_INCREMENT de la tabla `editor_usuario`
+--
+ALTER TABLE `editor_usuario`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `historial_pagos`
 --
 ALTER TABLE `historial_pagos`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54361;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54433;
+
+--
+-- AUTO_INCREMENT de la tabla `maximo`
+--
+ALTER TABLE `maximo`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `pagos`
@@ -59276,7 +59382,7 @@ ALTER TABLE `personal`
 -- AUTO_INCREMENT de la tabla `supervicion`
 --
 ALTER TABLE `supervicion`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`

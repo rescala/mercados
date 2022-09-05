@@ -7,3 +7,6 @@ module.exports ={
         database:'mercados'
     }
 };
+
+
+//mysql -u root -pPassw.123

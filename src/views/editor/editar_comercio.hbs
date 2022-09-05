@@ -2,8 +2,8 @@
 <!-- Header -->
 			<header id="header">
 				<h1><a href="#" style="display: flex; justify-content: center; align-items: center;"><img src="/images/logo_m.svg" style="min-height:4vh; height: 5vh;" alt="" srcset=""></a></h1>
-				<a href="/contador/">Administrador</a>
-				<a href="/logout_administrador">Cerrar Sesión</strong></a>
+				<a href="/editor">Editor</a>
+				<a href="/logout_editor">Cerrar Sesión</strong></a>
 			</header>
 
 		<!-- Banner -->
@@ -17,7 +17,7 @@
 					
 		<!-- Formulario -->
 					{{#each comercio}}
-                    <form action="/contador/editar_comercio/{{Id}}" style="max-height:70%;" id="myform" method="post">
+                    <form action="/editor/editar_comercio/{{Id}}" style="max-height:70%;" id="myform" method="post">
 					<ul class="actions special stacked">
 						
 						<input type="text" name="Id" id="Id" value="{{Id}}" style="display:none;">
@@ -95,7 +95,7 @@
 						</div>
 						{{/each}}
 						<li><button type="submit" form="myform" class="button primary large">Registrar</button></li>
-						<li><a href="/contador/" style="background-color: red;" class="button primary">Cancelar</a></li>
+						<li><a href="/editor/" style="background-color: red;" class="button primary">Cancelar</a></li>
 					</ul>
                     </form>
 				
