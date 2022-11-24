@@ -25,9 +25,11 @@ router.get('/pago_detalle/:id',isLoggedIn, async (req,res)=>{
     await pool.query('SET lc_time_names = "es_MX";');
     const folio = await pool.query('select * from comercio where Id='+req.params.id+';');
     const comercios = await pool.query('SELECT historial_pagos.`Id`, historial_pagos.`Id_Pagos`, historial_pagos.`Id_Comercio`,IF(historial_pagos.Pago="Adeuda", 1,null) as valor, historial_pagos.`Pago`, UPPER(DATE_FORMAT(pagos.Fecha, "%b-%Y")) AS Mes FROM `historial_pagos` INNER JOIN `pagos` ON historial_pagos.Id_Pagos=pagos.Id INNER JOIN comercio ON historial_pagos.Id_Comercio=comercio.Id WHERE comercio.Id='+req.params.id+';');
+    const folios = await pool.query('SELECT `comercio`.Folio,`comercio`.Nomb_Comercial,`comercio`.Horario,`comercio`.Giro,`comercio`.Descripcion,`comercio`.Area_Permitida,`comercio`.Turno,`comerciante`.Ape_Pat,`comerciante`.Ape_Mat,`comerciante`.Nombres,`comerciante`.Union_Comercio,`comercio`.antiguedad,`comerciante`.Pago_Derechos,`comerciante`.Telefono,`direccion_comercio`.Calle,`direccion_comercio`.Numero,`direccion_comercio`.Colonia,`direccion_comercio`.Sector FROM `comercio` INNER JOIN `comerciante` on `comerciante`.Id_Comercio=`comercio`.Id INNER JOIN `direccion_comercio` on `direccion_comercio`.Id_Comercio=`comercio`.Id WHERE `comercio`.Id="'+req.params.id+'";');
+    folios3 = folios[0];
+    console.log(folios);
     folio_= folio[0];
-    console.log(folio_);
-    res.render('contador_nvo/pago_detalle',{comercios,folio_});
+    res.render('contador_nvo/pago_detalle',{comercios,folio_,folios3});
 });
 
 router.get('/realizar_pago/:id',isLoggedIn, async (req,res)=>{

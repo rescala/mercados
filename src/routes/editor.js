@@ -12,6 +12,11 @@ router.get('/ingresar',isNotLoggedIn,async(req,res)=>{
     res.render('editor/ingresar');
 });
 
+router.get('/dulceros',isLoggedIn,async(req,res)=>{
+    const folios = await pool.query('SELECT `comercio`.Folio,`comerciante`.Ape_Pat,`comerciante`.Ape_Mat,`comerciante`.Nombres,`comerciante`.Pago_Derechos, `comercio`.Id FROM `comercio` INNER JOIN `comerciante` on `comerciante`.Id_Comercio=`comercio`.Id INNER JOIN `direccion_comercio` on `direccion_comercio`.Id_Comercio=`comercio`.Id;');
+    res.render('editor/datos_dulces',{folios});
+});
+
 
 router.get('/nuevo',isLoggedIn,async(req,res)=>{
     const folio = await pool.query('Select Folio from comercio where id=(select MAX(id) from comercio);');
@@ -42,7 +47,7 @@ router.get('/nuevo',isLoggedIn,async(req,res)=>{
 
 router.post('/editar_comercio/:id',isLoggedIn, async (req,res) =>{
     const id=req.params.id;
-    const {Nomb_Comercial, Horario, Giro, Descripcion, Area_Permitida, Turno, Ape_Pat, Ape_Mat, Nombres, Union_Comercio, antiguedad, Pago_Derechos, Telefono, Calle, Numero, Colonia, Sector}=req.body;
+    const {Nomb_Comercial, Horario, Giro, Descripcion, Area_Permitida, Turno, Ape_Pat, Ape_Mat, Nombres, clave_elector, Union_Comercio, antiguedad, Pago_Derechos, Telefono, Calle, Numero, Colonia, Sector}=req.body;
     const Comercio = {
         Nomb_Comercial,
         Horario,
@@ -62,6 +67,7 @@ router.post('/editar_comercio/:id',isLoggedIn, async (req,res) =>{
         Ape_Pat,
         Ape_Mat,
         Nombres,
+        clave_elector,
         Union_Comercio,
         Pago_Derechos,
         Telefono
@@ -79,7 +85,7 @@ router.post('/editar_comercio/:id',isLoggedIn, async (req,res) =>{
 
 router.post('/registrar_comercio/',isLoggedIn, async (req,res) =>{
     const id=req.params.id;
-    const {Nomb_Comercial, Horario, Giro, Folio, Descripcion, Area_Permitida, Turno, Ape_Pat, Ape_Mat, Nombres, Union_Comercio, antiguedad, Pago_Derechos, Telefono, Calle, Numero, Colonia, Sector}=req.body;
+    const {Nomb_Comercial, Horario, Giro, Folio, Descripcion, Area_Permitida, Turno, Ape_Pat, Ape_Mat, Nombres, clave_elector, Union_Comercio, antiguedad, Pago_Derechos, Telefono, Calle, Numero, Colonia, Sector}=req.body;
     const Comercio = {
         Nomb_Comercial,
         Horario,
@@ -106,6 +112,7 @@ router.post('/registrar_comercio/',isLoggedIn, async (req,res) =>{
         Ape_Pat,
         Ape_Mat,
         Nombres,
+        clave_elector,
         Union_Comercio,
         Pago_Derechos,
         Telefono
@@ -124,7 +131,7 @@ router.post('/registrar_comercio/',isLoggedIn, async (req,res) =>{
 });
 
 router.get('/editar_comercio/:id',isLoggedIn,async(req,res)=>{
-    const comercio = await pool.query('SELECT `comercio`.Id,`comercio`.Folio,`comercio`.Nomb_Comercial,`comercio`.Horario,`comercio`.Giro,`comercio`.Descripcion,`comercio`.Area_Permitida,`comercio`.Turno,`comerciante`.Ape_Pat,`comerciante`.Ape_Mat,`comerciante`.Nombres,`comerciante`.Union_Comercio,`comercio`.antiguedad,`comerciante`.Pago_Derechos,`comerciante`.Telefono,`direccion_comercio`.Calle,`direccion_comercio`.Numero,`direccion_comercio`.Colonia,`direccion_comercio`.Sector FROM `comercio` INNER JOIN `comerciante` on `comerciante`.Id_Comercio=`comercio`.Id INNER JOIN `direccion_comercio` on `direccion_comercio`.Id_Comercio=`comercio`.Id WHERE `comercio`.Folio="'+req.params.id+'";');
+    const comercio = await pool.query('SELECT `comercio`.Id,`comercio`.Folio,`comercio`.Nomb_Comercial,`comercio`.Horario,`comercio`.Giro,`comercio`.Descripcion,`comercio`.Area_Permitida,`comercio`.Turno,`comerciante`.Ape_Pat,`comerciante`.Ape_Mat,`comerciante`.Nombres,`comerciante`.Union_Comercio,`comercio`.antiguedad,`comerciante`.Pago_Derechos, `comerciante`.clave_elector, `comerciante`.Telefono,`direccion_comercio`.Calle,`direccion_comercio`.Numero,`direccion_comercio`.Colonia,`direccion_comercio`.Sector FROM `comercio` INNER JOIN `comerciante` on `comerciante`.Id_Comercio=`comercio`.Id INNER JOIN `direccion_comercio` on `direccion_comercio`.Id_Comercio=`comercio`.Id WHERE `comercio`.Folio="'+req.params.id+'";');
     console.log(comercio);
     res.render('editor/editar_comercio',{comercio});
 });
